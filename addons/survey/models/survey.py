@@ -632,7 +632,7 @@ class SurveyQuestion(models.Model):
         self.ensure_one()
         errors = {}
         if self.constr_mandatory:
-            answer_candidates = dict_keys_startswith(post, answer_tag)
+            answer_candidates = dict_keys_startswith(post, "%s_" % answer_tag)
             comment_flag = answer_candidates.pop(("%s_%s" % (answer_tag, -1)), None)
             if self.comments_allowed:
                 comment_answer = answer_candidates.pop(("%s_%s" % (answer_tag, 'comment')), '').strip()
@@ -653,7 +653,7 @@ class SurveyQuestion(models.Model):
         errors = {}
         if self.constr_mandatory:
             lines_number = len(self.labels_ids_2)
-            answer_candidates = dict_keys_startswith(post, answer_tag)
+            answer_candidates = dict_keys_startswith(post, "%s_" % answer_tag)
             answer_candidates.pop(("%s_%s" % (answer_tag, 'comment')), '').strip()
             # Number of lines that have been answered
             if self.matrix_subtype == 'simple':
